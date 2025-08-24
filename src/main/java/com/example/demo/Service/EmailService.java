@@ -18,4 +18,9 @@ public class EmailService {
         message.setText("Your OTP is: " + otp + "\nIt is valid for 10 minutes.");
         mailSender.send(message);
     }
+
+	public void sendOtp(String email, String otp) {
+		// TODO Auto-generated method stub
+		
+	}
 }

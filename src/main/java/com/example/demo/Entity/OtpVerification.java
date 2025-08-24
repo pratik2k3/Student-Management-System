@@ -5,6 +5,8 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+import com.example.demo.utility.OtpPurpose;
+
 @Entity
 @Table(name = "otp_verification")
 @Data
@@ -23,4 +25,9 @@ public class OtpVerification {
     private LocalDateTime expiryTime;
 
     private boolean expired;
+    
+    @Enumerated(EnumType.STRING)
+    private OtpPurpose purpose; // NEW FIELD
+    
+    
 }

@@ -115,8 +115,8 @@ public class EnrollmentServiceImpl implements EnrollmentService  {
         // If you want to force sum==totalFee, you can adjust last element similarly.
 
         // due date logic: use dto overrides or plan defaults
-        int firstShiftDays = dto.getFirstDueShiftDays() != null ? dto.getFirstDueShiftDays() : plan.getDefaultFirstDueShiftDays();
-        int intervalMonths = dto.getIntervalMonths() != null ? dto.getIntervalMonths() : plan.getDefaultIntervalMonths();
+        int firstShiftDays = plan.getDefaultFirstDueShiftDays();
+        int intervalMonths = plan.getDefaultIntervalMonths();
 
         LocalDate firstDue = e.getEnrolledAt().toLocalDate().plusDays(Math.max(0, firstShiftDays));
 

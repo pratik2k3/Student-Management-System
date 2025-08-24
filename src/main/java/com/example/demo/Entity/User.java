@@ -16,42 +16,55 @@ import lombok.Data;
 @Entity
 @Table(name = "Users")
 public class User {
-	 @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long userId;
-	 @Column(unique = true, nullable = false)
-	    private String username;
-	    private String password;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userId;
 
-	    private String email;
-	    private String mobileNo;
-	    private String phoneNo;
+    @Column(unique = true, nullable = false)
+    private String username;
 
-	    private String firstName;
-	    private String lastName;
-	    private String address;
+    private String password;
 
-	    private String role; // admin / student
-	    private LocalDate createDate;
+    @Column(unique = true)
+    private String email;   // Currently verified email
+    
+    @Column(unique = true)
+    private String pendingEmail;  // New email waiting for verification
 
-	    private String education;
-	    private Integer passoutYear;
+    private Boolean isEmailVerified = false; // true only when 'email' is verified
 
-	    private String status; // Active / Inactive
+    private String mobileNo;
+    private String phoneNo;
 
-	    private String parentContactNo;
-	    private Integer age;
+    private String firstName;
+    private String lastName;
+    private String address;
 
-	    private String gender;
-	    private LocalDate dob;
+    private String role; // admin / student
+    private LocalDate createDate;
 
-	     private String aadharCard;
-	    private String uanNo;
-		
-	    @ManyToMany(mappedBy = "users")
-	    private List<Batch> batches;
-	    
-	    
-	    
-	    
+    private String education;
+    private Integer passoutYear;
+
+    private String status; // Active / Inactive
+
+    private String parentContactNo;
+    private Integer age;
+
+    private String gender;
+    private LocalDate dob;
+
+    private String aadharCard;
+    private String uanNo;
+
+    @ManyToMany(mappedBy = "users")
+    private List<Batch> batches;
+
+    // Helper method to confirm new email
+    public void confirmNewEmail() {
+        this.email = this.pendingEmail;
+        this.pendingEmail = null;
+        this.isEmailVerified = true;
+    }
 }
